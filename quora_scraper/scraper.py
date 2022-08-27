@@ -4,6 +4,10 @@ import requests
 import json
 from math import ceil
 
+_QUORA_HASH='5c3c2040ed58afdb13717a7b62eba4a60fb3c70545f06cf2699a50581e42db17'
+_QUORA_FORMKEY='699fcc4d2c4cebf1c5258ef316fb7666'
+_QUORA_BSTRICT='q6V1AnQMyWyLkyBaQzKMPw=='
+
 @dataclasses.dataclass
 class Answer:
     id: str
@@ -11,7 +15,7 @@ class Answer:
     content: str
 
 class QuoraSearchScrapper:
-    def __init__(self, key, cookie):
+    def __init__(self, key=_QUORA_FORMKEY, cookie=_QUORA_BSTRICT):
         self.url = 'https://id.quora.com/graphql/gql_para_POST?q=SearchResultsListQuery'
         self._cookies = { "m-b_strict": cookie }
         self._headers = {
@@ -58,7 +62,7 @@ class QuoraSearchScrapper:
                 "after": str(offset)
             },
             "extensions": {
-                "hash": "ae3901b756cc33934180d0f2920729b8b018e544a0781fc6d7dd928bf523559b"
+                "hash": _QUORA_HASH
             }
         }
 
